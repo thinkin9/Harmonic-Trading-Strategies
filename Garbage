@@ -1,0 +1,53 @@
+// Tag
+tag_set = array.new_string(pnt)
+//comp4Tag() =>
+//    array.set(tag_set, 0, 'A')
+//    array.set(tag_set, 1, 'B')
+//    array.set(tag_set, 2, 'C')
+//    array.set(tag_set, 3, 'D')
+//comp5Tag() =>
+//    array.set(tag_set, 0, 'X')
+//   array.set(tag_set, 1, 'A')
+//    array.set(tag_set, 2, 'B')
+//    array.set(tag_set, 3, 'C')
+//    array.set(tag_set, 4, 'D')
+//pred4Tag() =>
+//    array.set(tag_set, 0, 'X')
+//    array.set(tag_set, 1, 'A')
+//    array.set(tag_set, 2, 'B')
+//    array.set(tag_set, 3, 'C')
+
+// Time
+time_set = array.new_int(pnt, 0)
+compTimeSelection() =>
+//    if (pnt == 5)
+//        comp5Tag()
+//    else 
+//        comp4Tag()
+//    array.set(time_set, 0, input.time(0, 'X', confirm = true))
+//    array.set(time_set, 1, input.time(0, 'A', confirm = true))
+//    array.set(time_set, 2, input.time(0, 'B', confirm = true))
+//    array.set(time_set, 3, input.time(0, 'C', confirm = true))
+//    array.set(time_set, 4, input.time(0, 'D', confirm = true))
+
+    
+//predTimeSelection() =>
+//    pred4Tag()
+    
+//    array.set(time_set, 1, input.time(0, 'A', confirm = true))
+//    array.set(time_set, 2, input.time(0, 'B', confirm = true))
+//    array.set(time_set, 3, input.time(0, 'C', confirm = true))
+//    array.set(time_set, 4, input.time(0, 'D', confirm = true))
+
+
+if (type == "Completion")
+    compTimeSelection()
+else
+    predTimeSelection()
+
+if (false)
+    array.set(time_set, 0, input.time(0, 'X', confirm = true))
+    array.set(time_set, 1, input.time(0, 'A', confirm = true))
+    array.set(time_set, 2, input.time(0, 'B', confirm = true))
+    array.set(time_set, 3, input.time(0, 'C', confirm = true))
+    array.set(time_set, 4, input.time(0, 'D', confirm = true))
