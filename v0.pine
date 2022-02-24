@@ -87,7 +87,7 @@ isFiveZero(xab, abc, bcd) => detLHbd(xab, 1.13, 1.618) and detLHbd(abc, 1.618, 2
 
 drawLineLabel(r, x1, x2, y1, str, c) =>
     line.new(x1, y1, x2, y1,xloc.bar_time, color = c, width = 1)
-    x3 = str == "SL" ? x2 : x1
+    x3 = str.contains(str, "SL") ? x2 : x1
     label.new(x3, y1, text = str.tostring(r, "#.### ") + str + str.tostring(int(y1), " @#"), xloc = xloc.bar_time, color = c, style = label.style_label_lower_left, textcolor = color.white, size = size.small)
 
 drawRecentRetracement(x1, x2, pa, pb, pc, str, c) =>
@@ -260,6 +260,7 @@ if(reciprocal_abcd)
     done := false
 if(extreme_impulse)
     done := false
+
 if(bat and isBat(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Bat", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
     drawLineLabel(.886, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(.886, price_x, price_a), "XA", color_XAB)
@@ -267,6 +268,7 @@ if(bat and isBat(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     drawRecentABCD(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_a, price_b, price_c, price_d, color_ABCD)
     drawLineLabel(1.0, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.0, price_x, price_a), "SL", color_SL)
     drawLineLabel(1.13, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.13, price_x, price_a), "SL", color_SL)
+
 if(alternate_bat and isAltBat(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Alternate Bat", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
     drawLineLabel(1.13, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.13, price_x, price_a), "XA", color_XAB)
@@ -274,6 +276,7 @@ if(alternate_bat and isAltBat(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     drawRecentABCD(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_a, price_b, price_c, price_d, color_ABCD)
 //drawLineLabel(.886, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(.886, price_x, price_a), "SL", color_SL)
     drawLineLabel(1.27, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.27, price_x, price_a), "SL", color_SL)
+
 if(gartley and isGartley(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Gartley", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
     drawLineLabel(.786, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(.786, price_x, price_a), "XA", color_XAB)
@@ -285,7 +288,7 @@ if(gartley and isGartley(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     else
         ratio_SL := 1.0
     drawLineLabel(ratio_SL, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(ratio_SL, price_x, price_a), "SL", color_SL)
-
+    
 if(deep_gartley and isDeepGartley(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Deep Gartley", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
     drawLineLabel(.886, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(.886, price_x, price_a), "XA", color_XAB)
@@ -313,6 +316,7 @@ if(deep_crab and isDeepCrab(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     drawRecentABCD(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_a, price_b, price_c, price_d, color_ABCD)
     drawLineLabel(1.902, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.902, price_x, price_a), "XASL", color_SL)
     drawLineLabel(2.0, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(2.0, price_x, price_a), "XASL", color_SL)
+
 if(butterfly and isButterfly(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Butterfly", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
     drawLineLabel(1.27, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.27, price_x, price_a), "XA", color_XAB)
@@ -339,3 +343,4 @@ if(five_zero and isFiveZero(ratio_xab, ratio_abc, ratio_bcd))
 
 if(three_drive and isThreeDrive(ratio_xab, ratio_abc, ratio_bcd))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Three Drive", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
+
