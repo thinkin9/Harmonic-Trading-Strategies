@@ -5,7 +5,7 @@
 indicator("Harmonic Trading Strategies v0", shorttitle = "HTS_v0", overlay = true)
 
 // Input
-errRate = input.float(0.1,'Error rate between 0.05(5%) to 0.2(20%)', minval = 0.05, maxval = 0.2, step = 0.01)
+errRate = input.float(0.1,'Error rate between 0.05(5%) to 0.2(20%)', minval = 0.01, maxval = 0.2, step = 0.01)
 dir = input.string(defval = "Bullish", title = "Direction of Pattern", options = ["Bullish", "Bearlish"])
 time_frame = input.timeframe('D', title = "Timeframe")
 
@@ -285,6 +285,7 @@ if(gartley and isGartley(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     else
         ratio_SL := 1.0
     drawLineLabel(ratio_SL, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(ratio_SL, price_x, price_a), "SL", color_SL)
+
 if(deep_gartley and isDeepGartley(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Deep Gartley", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
     drawLineLabel(.886, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(.886, price_x, price_a), "XA", color_XAB)
@@ -295,39 +296,46 @@ if(deep_gartley and isDeepGartley(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
         ratio_SL := 1.0
     else
         ratio_SL := 1.13
-    drawLineLabel(ratio_SL, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(ratio_SL, price_x, price_a), "SL", color_SL)
+    drawLineLabel(ratio_SL, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(ratio_SL, price_x, price_a), "XASL", color_SL)
+
 if(crab and isCrab(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Crab", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
     drawLineLabel(1.618, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.618, price_x, price_a), "XA", color_XAB)
     drawRecentRetracement(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_b, price_c, price_d, "BC", color_Retracement)
     drawRecentABCD(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_a, price_b, price_c, price_d, color_ABCD)
-    drawLineLabel(1.902, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.902, price_x, price_a), "SL", color_SL)
-    drawLineLabel(2.0, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(2.0, price_x, price_a), "SL", color_SL)
+    drawLineLabel(1.902, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.902, price_x, price_a), "XASL", color_SL)
+    drawLineLabel(2.0, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(2.0, price_x, price_a), "XASL", color_SL)
+
 if(deep_crab and isDeepCrab(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Deep Crab", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
     drawLineLabel(1.618, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.618, price_x, price_a), "XA", color_XAB)
     drawRecentRetracement(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_b, price_c, price_d, "BC", color_Retracement)
     drawRecentABCD(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_a, price_b, price_c, price_d, color_ABCD)
-    drawLineLabel(1.902, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.902, price_x, price_a), "SL", color_SL)
-    drawLineLabel(2.0, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(2.0, price_x, price_a), "SL", color_SL)
+    drawLineLabel(1.902, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.902, price_x, price_a), "XASL", color_SL)
+    drawLineLabel(2.0, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(2.0, price_x, price_a), "XASL", color_SL)
 if(butterfly and isButterfly(ratio_xab, ratio_abc, ratio_bcd, ratio_xad))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Butterfly", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
     drawLineLabel(1.27, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.27, price_x, price_a), "XA", color_XAB)
     drawRecentRetracement(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_b, price_c, price_d, "BC", color_Retracement)
     drawRecentABCD(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_a, price_b, price_c, price_d, color_ABCD)
-    drawLineLabel(1.414, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.414, price_x, price_a), "SL", color_SL)
+    drawLineLabel(1.414, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.414, price_x, price_a), "XASL", color_SL)
+
 if(shark and isShark(ratio_xab, ratio_abc, ratio_bcd, detRatio(0, 3, 4)))    
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Shark", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
     drawRecentRetracement(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_x, price_c, price_d, "XC", color_Retracement)
+
 //    drawRecentRetracement(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_a, price_b, price_c, "AB", color_Retracement)
     drawRecentRetracement(time_d, time_d - time_x + avgFrom2(time_x, time_d), price_b, price_c, price_d, "BC", color_Retracement)
-    drawLineLabel(1.13, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.13, price_x, price_c), "SL", color_SL)
-    drawLineLabel(1.27, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.27, price_x, price_c), "SL", color_SL)
+    drawLineLabel(1.13, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.13, price_x, price_c), "0BSL", color_SL)
+    drawLineLabel(1.27, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(1.27, price_x, price_c), "0BSL", color_SL)
+
 if(cypher and isCypher(ratio_xab, ratio_abc, ratio_xad))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Cypher", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
+
 if(five_zero and isFiveZero(ratio_xab, ratio_abc, ratio_bcd))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "5-0", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
     drawLineLabel(.50, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(.50, price_b, price_c), "BC", color_SL)
-    drawLineLabel(.618, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(.618, price_b, price_c), "SL", color_SL)
+    drawLineLabel(.618, time_d, time_d - time_x + avgFrom2(time_x, time_d), detRetracement(.618, price_b, price_c), "BCSL", color_SL)
+
 if(three_drive and isThreeDrive(ratio_xab, ratio_abc, ratio_bcd))
     label.new(avgFrom2(time_x, time_d), avgMmFrom5(price_x, price_a, price_b, price_c, price_d), text = dir + "Three Drive", xloc = xloc.bar_time, color = detColor(), style = label.style_label_center, textcolor = color.white, size = size.large)
